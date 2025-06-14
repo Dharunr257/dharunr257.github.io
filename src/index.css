@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html {
+  scroll-behavior: smooth;
+}
+@keyframes typeCycle {
+  0%, 10% {
+    content: 'Full Stack Web Developer';
+  }
+  25%, 35% {
+    content: '';
+  }
+  50%, 60% {
+    content: 'AI & ML Enthusiast';
+  }
+  75%, 85% {
+    content: '';
+  }
+  100% {
+    content: 'Full Stack Web Developer';
+  }
+}
+
+.animate-typeCycle::before {
+  content: 'Full Stack Web Developer';
+  animation: typeCycle 8s steps(30, end) infinite;
+  display: inline-block;
+}
+/* Optional: smoother scroll + prevent overscroll glow */
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  @apply bg-light-2 text-light-1 dark:bg-dark-2 dark:text-dark-1 transition-colors duration-300;
+}
