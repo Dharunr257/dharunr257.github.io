@@ -28,7 +28,7 @@ const projects = [
     description: 'E-commerce cart with add/edit/delete and checkout simulation.',
     type: 'Web',
     link: 'https://github.com/Dharunr257/Product-cart-MERN-stack-',
-    image: '/public//Project img/Product Cart.jpg',
+    image: '/public/Project img/Product Cart.jpg',
     tech: ['HTML', 'CSS', 'JavaScript'],
   },
   {
