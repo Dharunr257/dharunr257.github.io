@@ -3,7 +3,7 @@ import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import profileImage from "../assets/profile.jpg";
+import profileImage from "/assets/profile.jpg";
 
 const roles = ["Junior Full Stack Web Developer", "AI & ML Enthusiast"];
 
