@@ -13,17 +13,7 @@ const experiences = [
       'Integrated third-party APIs and scalable backend services.',
       'Participated in agile practices like code reviews and documentation.',
     ],
-  },
-  {
-    title: 'Freelancer - Full Stack Developer',
-    period: 'Ongoing',
-    location: 'Remote',
-    description: [
-      'Developed full-stack web solutions for client requirements.',
-      'Built custom admin panels, e-commerce components, and dashboards.',
-      'Used React, Node.js, Express, MongoDB, and Tailwind CSS.',
-    ],
-  },
+  }
 ];
 
 export default function Experience() {

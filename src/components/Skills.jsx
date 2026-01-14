@@ -11,56 +11,85 @@ import {
 
 const skillData = [
   {
-    category: "Languages",
+    category: "Cloud Platform (AWS)",
+    skills: [
+      { name: "AWS", icon: <FaAws size={30} /> },
+      { name: "EC2", icon: <FaAws size={30} /> },
+      { name: "S3", icon: <FaAws size={30} /> },
+      { name: "RDS", icon: <FaAws size={30} /> },
+      { name: "IAM", icon: <FaAws size={30} /> },
+      { name: "VPC", icon: <FaAws size={30} /> },
+      { name: "Route 53", icon: <FaAws size={30} /> },
+    ],
+  },
+
+  {
+    category: "Cloud Architecture & Reliability",
+    skills: [
+      { name: "High Availability", icon: <FaAws size={30} /> },
+      { name: "Fault Tolerance", icon: <FaAws size={30} /> },
+      { name: "Auto Scaling", icon: <FaAws size={30} /> },
+      { name: "Load Balancing", icon: <FaAws size={30} /> },
+      { name: "Disaster Recovery", icon: <FaAws size={30} /> },
+    ],
+  },
+
+  {
+    category: "Security, Monitoring & Cost",
+    skills: [
+      { name: "IAM & Least Privilege", icon: <FaAws size={30} /> },
+      { name: "CloudWatch", icon: <FaAws size={30} /> },
+      { name: "CloudTrail", icon: <FaAws size={30} /> },
+      { name: "AWS Budgets", icon: <FaAws size={30} /> },
+      { name: "Cost Optimization", icon: <FaAws size={30} /> },
+    ],
+  },
+
+  {
+    category: "Automation & DevOps Basics",
+    skills: [
+      { name: "Linux", icon: <FaGitAlt size={30} /> },
+      { name: "Docker", icon: <FaNodeJs size={30} /> },
+      { name: "Git", icon: <FaGitAlt size={30} /> },
+      { name: "GitHub Actions", icon: <FaGithub size={30} /> },
+      { name: "Shell Scripting", icon: <FaGitAlt size={30} /> },
+    ],
+  },
+
+  {
+    category: "Programming & Scripting",
     skills: [
       { name: "Python", icon: <FaPython size={30} /> },
       { name: "JavaScript", icon: <FaJs size={30} /> },
-      { name: "HTML", icon: <FaHtml5 size={30} /> },
-      { name: "CSS", icon: <FaCss3Alt size={30} /> },
+      { name: "Bash", icon: <FaGitAlt size={30} /> },
     ],
   },
+
   {
-    category: "Web Development",
+    category: "Full Stack (Supportive)",
     skills: [
       { name: "React", icon: <FaReact size={30} /> },
       { name: "Node.js", icon: <FaNodeJs size={30} /> },
       { name: "Express.js", icon: <SiExpress size={30} /> },
-      { name: "Angular", icon: <SiAngular size={30} /> },
       { name: "Tailwind CSS", icon: <SiTailwindcss size={30} /> },
-      { name: "Bootstrap", icon: <SiBootstrap size={30} /> },
     ],
   },
+
   {
-    category: "AI / ML",
-    skills: [
-      { name: "TensorFlow", icon: <SiTensorflow size={30} /> },
-      { name: "PyTorch", icon: <SiPytorch size={30} /> },
-      { name: "NumPy", icon: <SiNumpy size={30} /> },
-      { name: "Pandas", icon: <SiPandas size={30} /> },
-      { name: "OpenCV", icon: <SiOpencv size={30} /> },
-    ],
-  },
-  {
-    category: "Databases",
+    category: "Databases & Storage",
     skills: [
       { name: "MongoDB", icon: <SiMongodb size={30} /> },
       { name: "MySQL", icon: <SiMysql size={30} /> },
       { name: "PostgreSQL", icon: <SiPostgresql size={30} /> },
     ],
   },
+
   {
     category: "Tools & Platforms",
     skills: [
-      { name: "Git", icon: <FaGitAlt size={30} /> },
       { name: "GitHub", icon: <FaGithub size={30} /> },
       { name: "Postman", icon: <SiPostman size={30} /> },
       { name: "Vite", icon: <SiVite size={30} /> },
-    ],
-  },
-  {
-    category: "Hosting / Cloud",
-    skills: [
-      { name: "AWS", icon: <FaAws size={30} /> },
       { name: "Netlify", icon: <SiNetlify size={30} /> },
     ],
   },

@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import profileImage from "/assets/profile.jpg";
 
-const roles = ["Junior Full Stack Web Developer", "AI & ML Enthusiast"];
+const roles = ["Cloud Engineer | AWS Certified Cloud Practitioner (CLF-C02)"];
 
 function Typewriter() {
   const [text, setText] = useState("");
@@ -65,10 +65,7 @@ export default function About() {
         <Typewriter />
 
         <p className="text-lg leading-relaxed max-w-xl mx-auto md:mx-0 my-6 text-light-1 dark:text-dark-1">
-          I'm a passionate Full Stack Web Developer and AI/ML Enthusiast with a
-          strong foundation in real-time systems, deep learning, and embedded
-          development. I enjoy building modern, performant, and intelligent
-          solutions that make an impact.
+          I’m a passionate Cloud Engineer with a strong foundation in designing secure, scalable, and cost-efficient cloud solutions. I enjoy building reliable cloud architectures, optimizing performance and cost, and applying best practices in availability, security, and monitoring to deliver real-world impact.
         </p>
 
         {/* Resume & GitHub buttons */}
