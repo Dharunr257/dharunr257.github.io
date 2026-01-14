@@ -80,7 +80,7 @@ export default function About() {
             My Resume
           </a>
           <a
-            href="https://github.com/Dharunr257"      
+            href="https://github.com/Dharunr257"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-light-4 text-white dark:bg-dark-4 dark:text-white font-semibold px-5 py-2 rounded-md shadow-md transition transform duration-300
