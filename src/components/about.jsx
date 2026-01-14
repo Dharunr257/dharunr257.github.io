@@ -3,7 +3,7 @@ import { FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import profileImage from "/assets/profile.png";
+import profileImage from "/assets/profile-v2.png";
 
 const roles = ["Cloud Engineer | AWS Certified Cloud Practitioner (CLF-C02)"];
 
@@ -71,7 +71,7 @@ export default function About() {
         {/* Resume & GitHub buttons */}
         <div className="flex justify-center md:justify-start gap-4 mt-4">
           <a
-            href="/Dharun Resume.pdf"
+            href="/Dharun Resume-v2.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-light-4 text-white dark:bg-dark-4 dark:text-white font-semibold px-5 py-2 rounded-md shadow-md transition transform duration-300
