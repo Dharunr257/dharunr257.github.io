@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Blog | Dharun R</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Custom Configuration -->
+    <script src="js/tailwind.config.js"></script>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        body { 
+            background-color: #0a0a0f; 
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif; 
+            background-image: linear-gradient(rgba(0,212,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.02) 1px, transparent 1px); 
+            background-size: 50px 50px;
+        }
+        .glass-card { 
+            background: rgba(18, 18, 26, 0.8); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255,255,255,0.05); 
+        }
+        .gradient-text { 
+            background: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #f97316 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+        }
+        /* Markdown rendering overrides */
+        .markdown-body h1 { font-size: 2.25rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        .markdown-body h2 { font-size: 1.75rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.75rem; color: #f8fafc; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem; }
+        .markdown-body h3 { font-size: 1.35rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #f1f5f9; }
+        .markdown-body p { margin-top: 0; margin-bottom: 1rem; line-height: 1.75; color: #cbd5e1; }
+        .markdown-body a { color: #00d4ff; text-decoration: none; border-bottom: 1px dashed rgba(0, 212, 255, 0.4); transition: color 0.2s; }
+        .markdown-body a:hover { color: #a855f7; border-bottom-color: #a855f7; }
+        .markdown-body ul, .markdown-body ol { margin-top: 0; margin-bottom: 1rem; padding-left: 1.5rem; list-style-type: disc; color: #cbd5e1; }
+        .markdown-body li { margin-bottom: 0.25rem; line-height: 1.6; }
+        .markdown-body pre { background-color: #12121a; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; }
+        .markdown-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background-color: rgba(255,255,255,0.05); padding: 0.2rem 0.4rem; border-radius: 4px; color: #00d4ff; }
+        .markdown-body pre code { background-color: transparent; padding: 0; border-radius: 0; color: #e2e8f0; }
+        .markdown-body blockquote { border-left: 4px solid #a855f7; padding-left: 1rem; color: #94a3b8; font-style: italic; margin-bottom: 1rem; }
+        .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+        .markdown-body th, .markdown-body td { border: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 0.75rem; text-align: left; }
+        .markdown-body th { background-color: rgba(255,255,255,0.03); color: #ffffff; }
+    </style>
+</head>
+<body class="antialiased grid-bg relative min-h-screen pt-28 pb-12 px-4 sm:px-6 lg:px-8">
+    <!-- Animated Particles -->
+    <div id="particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center font-mono font-bold text-white text-sm">DR</div>
+                    <span class="font-mono font-bold text-lg">Dharun<span class="text-cyan-400">.</span>R</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="dharun_portfolio.html#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="dharun_portfolio.html#skills" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Skills</a>
+                    <a href="dharun_portfolio.html#experience" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Experience</a>
+                    <a href="dharun_portfolio.html#projects" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Projects</a>
+                    <a href="dharun_portfolio.html#certifications" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Certifications</a>
+                    <a href="dharun_portfolio.html#contact" class="btn-primary px-5 py-2 rounded-lg text-sm font-semibold text-white">Get In Touch</a>
+                </div>
+                <button class="md:hidden text-white" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden glass-card border-t border-white/5">
+            <div class="px-4 py-4 space-y-3">
+                <a href="dharun_portfolio.html#about" class="block text-sm font-medium text-gray-300 hover:text-white">About</a>
+                <a href="dharun_portfolio.html#skills" class="block text-sm font-medium text-gray-300 hover:text-white">Skills</a>
+                <a href="dharun_portfolio.html#experience" class="block text-sm font-medium text-gray-300 hover:text-white">Experience</a>
+                <a href="dharun_portfolio.html#projects" class="block text-sm font-medium text-gray-300 hover:text-white">Projects</a>
+                <a href="dharun_portfolio.html#certifications" class="block text-sm font-medium text-gray-300 hover:text-white">Certifications</a>
+                <a href="dharun_portfolio.html#contact" class="block btn-primary px-5 py-2 rounded-lg text-sm font-semibold text-white text-center">Get In Touch</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
+            <a href="dharun_portfolio.html" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group">
+                <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                <span class="font-mono text-xs">Back to Portfolio</span>
+            </a>
+            <div class="flex items-center gap-2">
+                <span class="font-mono text-xs text-gray-500">PROJECT LOGS</span>
+            </div>
+        </header>
+
+        <!-- Loader -->
+        <div id="loader" class="glass-card rounded-2xl p-12 text-center flex flex-col items-center justify-center min-h-[300px]">
+            <div class="w-12 h-12 border-4 border-cyan-400/20 border-t-cyan-400 rounded-full animate-spin mb-4"></div>
+            <p class="font-mono text-gray-400">Fetching project documentation from GitHub...</p>
+        </div>
+
+        <!-- Content Container -->
+        <article id="blogContent" class="glass-card rounded-[20px] p-6 sm:p-10 border border-white/10 hidden relative overflow-hidden shadow-2xl">
+            <!-- Accent Top Stripe -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-orange-500"></div>
+            
+            <!-- Repository Information Header -->
+            <div class="mb-8 pb-6 border-b border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <span id="blogCategory" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-400 text-xs font-mono mb-2">
+                        <i class="fab fa-github"></i> GitHub Repository
+                    </span>
+                    <h1 id="repoTitle" class="text-3xl font-extrabold text-white mt-1">Project Name</h1>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a id="githubLink" href="#" target="_blank" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-sm transition-all flex items-center gap-2">
+                        <i class="fab fa-github"></i> View Repo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Rendered Markdown Body -->
+            <div class="markdown-body text-gray-300" id="markdownRender">
+                <!-- HTML rendered from markdown goes here -->
+            </div>
+        </article>
+
+        <!-- Error Card -->
+        <div id="errorCard" class="glass-card rounded-2xl p-8 border border-red-500/20 text-center hidden min-h-[300px] flex flex-col items-center justify-center">
+            <div class="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 text-2xl mb-4">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 class="text-xl font-bold text-white mb-2">Documentation Not Found</h2>
+            <p id="errorMessage" class="text-gray-400 max-w-md mx-auto mb-6">Could not fetch README.md for this repository. The repository might be private or doesn't exist.</p>
+            <a href="dharun_portfolio.html" class="px-6 py-3 bg-gradient-to-br from-cyan-400 to-purple-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all inline-flex items-center gap-2">
+                <i class="fas fa-chevron-left"></i> Return to Portfolio
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Floating background particles matching portfolio theme
+            const particlesContainer = document.getElementById('particles');
+            if (particlesContainer) {
+                for (let i = 0; i < 35; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'absolute rounded-full bg-cyan-400/20 pointer-events-none';
+                    const size = Math.random() * 4 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animation = `float ${Math.random() * 6 + 4}s ease-in-out infinite`;
+                    particle.style.animationDelay = Math.random() * 5 + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const repo = params.get('repo');
+            
+            const loader = document.getElementById('loader');
+            const blogContent = document.getElementById('blogContent');
+            const errorCard = document.getElementById('errorCard');
+            const errorMessage = document.getElementById('errorMessage');
+            const markdownRender = document.getElementById('markdownRender');
+            const repoTitle = document.getElementById('repoTitle');
+            const githubLink = document.getElementById('githubLink');
+            
+            if (!repo) {
+                showError("No repository parameter provided. URL must look like: blog.html?repo=repository-name");
+                return;
+            }
+
+            repoTitle.textContent = repo.replace(/-/g, ' ');
+            githubLink.href = `https://github.com/Dharunr257/${repo}`;
+
+            // Multiple fallback URLs to try loading README content (branches & naming casing)
+            const urls = [
+                `https://raw.githubusercontent.com/Dharunr257/${repo}/main/README.md`,
+                `https://raw.githubusercontent.com/Dharunr257/${repo}/main/readme.md`,
+                `https://raw.githubusercontent.com/Dharunr257/${repo}/master/README.md`,
+                `https://raw.githubusercontent.com/Dharunr257/${repo}/master/readme.md`
+            ];
+
+            function tryFetchUrl(index) {
+                if (index >= urls.length) {
+                    return Promise.reject(new Error("README not found in any standard branches or naming formats."));
+                }
+                const url = urls[index];
+                return fetch(url).then(res => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP ${res.status}`);
+                    }
+                    return res.text();
+                }).catch(() => {
+                    // Fetch failed, try next fallback in the list
+                    return tryFetchUrl(index + 1);
+                });
+            }
+
+            tryFetchUrl(0)
+                .then(markdown => {
+                    loader.classList.add('hidden');
+                    blogContent.classList.remove('hidden');
+                    markdownRender.innerHTML = marked.parse(markdown);
+                })
+                .catch(err => {
+                    showError(`Failed to fetch documentation for "${repo}". Make sure the README file exists in the main or master branch as README.md or readme.md.`);
+                });
+
+            function showError(message) {
+                loader.classList.add('hidden');
+                blogContent.classList.add('hidden');
+                errorCard.classList.remove('hidden');
+                errorMessage.textContent = message;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+body { background-color: #0a0a0f; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+.gradient-text { background: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #f97316 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.glass-card { background: rgba(18, 18, 26, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+.terminal-line { position: relative; padding-left: 1.5rem; }
+.terminal-line::before { content: '$'; position: absolute; left: 0; color: #22c55e; font-family: 'JetBrains Mono', monospace; }
+.skill-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.skill-bar-fill { height: 100%; background: linear-gradient(90deg, #00d4ff, #a855f7); border-radius: 2px; transition: width 1.5s ease-out; }
+.project-card { transition: all 0.3s ease; }
+.project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,212,255,0.1); }
+.nav-link { position: relative; }
+.nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, #00d4ff, #a855f7); transition: width 0.3s ease; }
+.nav-link:hover::after { width: 100%; }
+.stat-card { background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(168,85,247,0.05)); border: 1px solid rgba(0,212,255,0.1); }
+.typing-cursor::after { content: '|'; animation: blink 1s step-end infinite; color: #00d4ff; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.grid-bg { background-image: linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px); background-size: 50px 50px; }
+.cert-badge { background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(168,85,247,0.1)); border: 1px solid rgba(0,212,255,0.2); }
+.scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+.scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+.btn-primary { background: linear-gradient(135deg, #00d4ff, #a855f7); transition: all 0.3s ease; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,212,255,0.3); }
+.service-card { background: rgba(18, 18, 26, 0.6); border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+.service-card:hover { border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.05); }
+.tag { background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2); color: #00d4ff; }
+.repo-tag { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #22c55e; }
+.new-badge { background: linear-gradient(135deg, #f97316, #ef4444); color: white; font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 9999px; font-weight: 600; }
+
+/* Custom Keyframes */
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(10px); }
+}
+
+/* Premium Certifications styles */
+.cert-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+.cert-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #00d4ff, #a855f7, #f97316);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    filter: blur(8px);
+}
+.cert-card:hover::before {
+    opacity: 0.35;
+}
+.cert-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(0, 212, 255, 0.25);
+    background: rgba(18, 18, 26, 0.95);
+}
+.cert-card:hover img {
+    filter: brightness(1);
+    transform: scale(1.05);
+}
+.cert-card img {
+    filter: brightness(0.85);
+    transition: all 0.3s ease;
+}
+
+/* Dynamic Filter Transition */
+.project-card-wrapper {
+    transition: opacity 0.4s ease, transform 0.4s ease, display 0.4s allow-discrete;
+}
+.project-card-wrapper.hidden-item {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+    display: none !important;
+}
+
+/* Premium Inputs */
+.form-input {
+    background: rgba(18, 18, 26, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.form-input:focus {
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+    background: rgba(18, 18, 26, 0.8);
+    outline: none;
+}
