@@ -19,6 +19,9 @@
     <!-- Custom CSS Styles -->
     <link rel="stylesheet" href="css/styles.css">
     
+    <!-- GitHub Markdown CSS for accurate styling of README -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-dark.min.css">
+    
     <!-- Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
@@ -42,21 +45,37 @@
             background-clip: text; 
         }
         /* Markdown rendering overrides */
-        .markdown-body h1 { font-size: 2.25rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
-        .markdown-body h2 { font-size: 1.75rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.75rem; color: #f8fafc; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem; }
-        .markdown-body h3 { font-size: 1.35rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #f1f5f9; }
-        .markdown-body p { margin-top: 0; margin-bottom: 1rem; line-height: 1.75; color: #cbd5e1; }
-        .markdown-body a { color: #00d4ff; text-decoration: none; border-bottom: 1px dashed rgba(0, 212, 255, 0.4); transition: color 0.2s; }
-        .markdown-body a:hover { color: #a855f7; border-bottom-color: #a855f7; }
-        .markdown-body ul, .markdown-body ol { margin-top: 0; margin-bottom: 1rem; padding-left: 1.5rem; list-style-type: disc; color: #cbd5e1; }
-        .markdown-body li { margin-bottom: 0.25rem; line-height: 1.6; }
-        .markdown-body pre { background-color: #12121a; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; }
-        .markdown-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background-color: rgba(255,255,255,0.05); padding: 0.2rem 0.4rem; border-radius: 4px; color: #00d4ff; }
-        .markdown-body pre code { background-color: transparent; padding: 0; border-radius: 0; color: #e2e8f0; }
-        .markdown-body blockquote { border-left: 4px solid #a855f7; padding-left: 1rem; color: #94a3b8; font-style: italic; margin-bottom: 1rem; }
-        .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
-        .markdown-body th, .markdown-body td { border: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 0.75rem; text-align: left; }
-        .markdown-body th { background-color: rgba(255,255,255,0.03); color: #ffffff; }
+        .markdown-body {
+            background-color: transparent !important;
+            font-family: 'Inter', sans-serif;
+            color: #cbd5e1;
+        }
+        .markdown-body pre {
+            background-color: #12121a !important;
+            border: 1px solid rgba(255,255,255,0.05) !important;
+        }
+        .markdown-body code {
+            background-color: rgba(255,255,255,0.05) !important;
+            color: #00d4ff !important;
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+        .markdown-body pre code {
+            background-color: transparent !important;
+            color: #e2e8f0 !important;
+        }
+        .markdown-body a {
+            color: #00d4ff !important;
+            border-bottom: 1px dashed rgba(0, 212, 255, 0.4) !important;
+            text-decoration: none !important;
+        }
+        .markdown-body a:hover {
+            color: #a855f7 !important;
+            border-bottom-color: #a855f7 !important;
+        }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+            color: #ffffff !important;
+            border-bottom-color: rgba(255,255,255,0.1) !important;
+        }
     </style>
 </head>
 <body class="antialiased grid-bg relative min-h-screen pt-28 pb-12 px-4 sm:px-6 lg:px-8">
@@ -193,22 +212,24 @@
 
             // Multiple fallback URLs to try loading README content (branches & naming casing)
             const urls = [
-                `https://raw.githubusercontent.com/Dharunr257/${repo}/main/README.md`,
-                `https://raw.githubusercontent.com/Dharunr257/${repo}/main/readme.md`,
-                `https://raw.githubusercontent.com/Dharunr257/${repo}/master/README.md`,
-                `https://raw.githubusercontent.com/Dharunr257/${repo}/master/readme.md`
+                { url: `https://raw.githubusercontent.com/Dharunr257/${repo}/main/README.md`, branch: 'main' },
+                { url: `https://raw.githubusercontent.com/Dharunr257/${repo}/main/readme.md`, branch: 'main' },
+                { url: `https://raw.githubusercontent.com/Dharunr257/${repo}/master/README.md`, branch: 'master' },
+                { url: `https://raw.githubusercontent.com/Dharunr257/${repo}/master/readme.md`, branch: 'master' }
             ];
 
             function tryFetchUrl(index) {
                 if (index >= urls.length) {
                     return Promise.reject(new Error("README not found in any standard branches or naming formats."));
                 }
-                const url = urls[index];
-                return fetch(url).then(res => {
+                const item = urls[index];
+                return fetch(item.url).then(res => {
                     if (!res.ok) {
                         throw new Error(`HTTP ${res.status}`);
                     }
-                    return res.text();
+                    return res.text().then(text => {
+                        return { markdown: text, branch: item.branch };
+                    });
                 }).catch(() => {
                     // Fetch failed, try next fallback in the list
                     return tryFetchUrl(index + 1);
@@ -216,10 +237,47 @@
             }
 
             tryFetchUrl(0)
-                .then(markdown => {
+                .then(({ markdown, branch }) => {
                     loader.classList.add('hidden');
                     blogContent.classList.remove('hidden');
-                    markdownRender.innerHTML = marked.parse(markdown);
+
+                    const rawBaseUrl = `https://raw.githubusercontent.com/Dharunr257/${repo}/${branch}/`;
+                    const repoUrl = `https://github.com/Dharunr257/${repo}`;
+
+                    // Set up marked custom renderer
+                    const renderer = new marked.Renderer();
+                    
+                    // Override image rendering to support relative paths
+                    renderer.image = function(href, title, text) {
+                        let finalHref = href;
+                        if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('//') && !href.startsWith('data:')) {
+                            // Resolve relative URL
+                            const cleanHref = href.startsWith('./') ? href.substring(2) : href.startsWith('/') ? href.substring(1) : href;
+                            finalHref = `${rawBaseUrl}${cleanHref}`;
+                        }
+                        return `<img src="${finalHref}" alt="${text || ''}" title="${title || ''}" style="max-width:100%; display:block; margin:1.5rem auto; border-radius:8px; border:1px solid rgba(255,255,255,0.05); box-shadow:0 4px 12px rgba(0,0,0,0.3);">`;
+                    };
+
+                    // Override link rendering to support relative paths
+                    renderer.link = function(href, title, text) {
+                        let finalHref = href;
+                        if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                            const cleanHref = href.startsWith('./') ? href.substring(2) : href.startsWith('/') ? href.substring(1) : href;
+                            finalHref = `${repoUrl}/blob/${branch}/${cleanHref}`;
+                        }
+                        return `<a href="${finalHref}" title="${title || ''}" target="_blank" class="text-cyan-400 hover:text-purple-400 underline decoration-dashed transition-all">${text}</a>`;
+                    };
+
+                    marked.use({ renderer });
+
+                    // Preprocess markdown to fix raw HTML image src tags too!
+                    let processedMarkdown = markdown;
+                    processedMarkdown = processedMarkdown.replace(/<img([^>]+)src=["'](?!http:\/\/|https:\/\/|\/\/|data:)([^"']+)["']/g, (match, before, src) => {
+                        const cleanSrc = src.startsWith('./') ? src.substring(2) : src.startsWith('/') ? src.substring(1) : src;
+                        return `<img${before}src="${rawBaseUrl}${cleanSrc}"`;
+                    });
+
+                    markdownRender.innerHTML = marked.parse(processedMarkdown);
                 })
                 .catch(err => {
                     showError(`Failed to fetch documentation for "${repo}". Make sure the README file exists in the main or master branch as README.md or readme.md.`);

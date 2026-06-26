@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Typing Animation
-    const roles = ["Cloud Engineer", "AWS Solutions Architect", "DevOps Enthusiast", "Infrastructure Designer"];
+    const roles = ["Cloud Engineer", "AWS Solutions Architect", "DevOps Engineer", "cloud Infrastructure Designer"];
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
