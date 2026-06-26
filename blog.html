@@ -248,24 +248,34 @@
                     const renderer = new marked.Renderer();
                     
                     // Override image rendering to support relative paths
-                    renderer.image = function(href, title, text) {
+                    renderer.image = function(arg1, title, text) {
+                        // Support both newer object argument and older positional arguments
+                        let href = typeof arg1 === 'object' ? arg1.href : arg1;
+                        let imgTitle = typeof arg1 === 'object' ? arg1.title : title;
+                        let imgText = typeof arg1 === 'object' ? arg1.text : text;
+
                         let finalHref = href;
                         if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('//') && !href.startsWith('data:')) {
                             // Resolve relative URL
                             const cleanHref = href.startsWith('./') ? href.substring(2) : href.startsWith('/') ? href.substring(1) : href;
                             finalHref = `${rawBaseUrl}${cleanHref}`;
                         }
-                        return `<img src="${finalHref}" alt="${text || ''}" title="${title || ''}" style="max-width:100%; display:block; margin:1.5rem auto; border-radius:8px; border:1px solid rgba(255,255,255,0.05); box-shadow:0 4px 12px rgba(0,0,0,0.3);">`;
+                        return `<img src="${finalHref}" alt="${imgText || ''}" title="${imgTitle || ''}" style="max-width:100%; display:block; margin:1.5rem auto; border-radius:8px; border:1px solid rgba(255,255,255,0.05); box-shadow:0 4px 12px rgba(0,0,0,0.3);">`;
                     };
 
                     // Override link rendering to support relative paths
-                    renderer.link = function(href, title, text) {
+                    renderer.link = function(arg1, title, text) {
+                        // Support both newer object argument and older positional arguments
+                        let href = typeof arg1 === 'object' ? arg1.href : arg1;
+                        let linkTitle = typeof arg1 === 'object' ? arg1.title : title;
+                        let linkText = typeof arg1 === 'object' ? arg1.text : text;
+
                         let finalHref = href;
                         if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
                             const cleanHref = href.startsWith('./') ? href.substring(2) : href.startsWith('/') ? href.substring(1) : href;
                             finalHref = `${repoUrl}/blob/${branch}/${cleanHref}`;
                         }
-                        return `<a href="${finalHref}" title="${title || ''}" target="_blank" class="text-cyan-400 hover:text-purple-400 underline decoration-dashed transition-all">${text}</a>`;
+                        return `<a href="${finalHref}" title="${linkTitle || ''}" target="_blank" class="text-cyan-400 hover:text-purple-400 underline decoration-dashed transition-all">${linkText}</a>`;
                     };
 
                     marked.use({ renderer });
